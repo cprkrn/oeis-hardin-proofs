@@ -30,9 +30,11 @@ Files:
 
 Data: the OEIS mirror at github.com/oeis/oeisdata, Nov 2026. Each program re-derives every result from that data.
 
-**Independent verification.** A second AI model wrote fresh code, sharing none with the original. For the 677 neighbour-count entries it ran three independent checks:
+**Independent verification.** A second AI model wrote fresh code, sharing none with the original. For 677 of the neighbour-count entries (all of widths 2–4) it ran three independent checks:
 - direct brute-force enumeration of the small arrays;
 - its own transfer matrix;
 - its own Cayley–Hamilton proof.
 
 All 677 were proved, none refuted, and all 17,185 OEIS terms matched. Each recurrence holds from exactly the start Hardin stated. The "antidiagonally adjacent" family means 6 neighbours, not 8, and the brute-force counts confirm this reading. The 30 "Empirical g.f." lines by C. Barker on these entries follow from the proved recurrences.
+
+The other 210 proofs (75 of width 5, plus the 135 constant-stress tilings) use the same programs and the same argument, and reproduce every OEIS term. They have not been re-implemented independently.
