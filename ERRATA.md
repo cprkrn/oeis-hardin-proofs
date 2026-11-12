@@ -14,3 +14,13 @@ For each entry:
 | A196074 | n X 4, f = (0,3,2,1,4) | order-37 recurrence from n=38 | n=38 | 299231374661523 | 299231374661916 |
 
 The true minimal recurrence orders are about 25 (A197230) and 43 (A196074). These estimates come from Berlekamp–Massey mod a prime and are unproved. Suggested OEIS action: correct or remove the "Empirical:" formula and cite these values.
+
+## Ready-to-paste OEIS edits
+
+A197230: add
+  %F A197230 The empirical recurrence above fails at n=23: a(23) = 1327965802062332, while the recurrence gives 1327965802062198. See link. - _Cooper Kernan_, Nov 12 2026
+  %H A197230 Cooper Kernan, <a href="https://github.com/cprkrn/oeis-hardin-proofs/blob/main/ERRATA.md">Counterexample to the empirical recurrence</a>
+
+A196074: add
+  %F A196074 The empirical recurrence above fails at n=38: a(38) = 299231374661523, while the recurrence gives 299231374661916. See link. - _Cooper Kernan_, Nov 12 2026
+  %H A196074 Cooper Kernan, <a href="https://github.com/cprkrn/oeis-hardin-proofs/blob/main/ERRATA.md">Counterexample to the empirical recurrence</a>

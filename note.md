@@ -1,6 +1,6 @@
 # Proofs of 887 empirical recurrences of R. H. Hardin in the OEIS
 
-**Draft note, Nov 2026.** Author: _Your Name_. The proofs were computer-assisted, using an AI agent.
+**Draft note, Nov 2026.** Author: Cooper Kernan. The proofs were computer-assisted, using an AI agent.
 
 ## Summary
 
