@@ -1,36 +1,47 @@
-# Errata: two empirical recurrences that are false
+# Errata: incorrect "Empirical" formulas in the OEIS
 
-Both entries are counts of 0..4 arrays in which each element x equals the number of its horizontal and vertical neighbours equal to f(x).
+How each formula below was checked:
+- The sequence was recomputed exactly from its OEIS definition.
+- Every listed OEIS term is reproduced, so the terms are correct and the error is in the formula.
+- Every item was confirmed by two independent programs written separately (`batch2/` and `batch3_gf/`, plus an independent audit).
 
-For each entry:
-- every listed OEIS term is reproduced exactly;
-- the stated recurrence fails from the first n it claims;
-- the failure was found by `batch2/prove2.py`;
-- it was confirmed by an independent program, `batch2/refuted_independent_check.py`.
+## 1. Recurrences that are truncated (2)
 
-| A-number | Definition | Claim | First failure | Actual a(n) | Recurrence gives |
-|---|---|---|---|---|---|
-| A197230 | n X 3, f = (4,3,0,1,2) | order-22 recurrence from n=23 | n=23 | 1327965802062332 | 1327965802062198 |
-| A196074 | n X 4, f = (0,3,2,1,4) | order-37 recurrence from n=38 | n=38 | 299231374661523 | 299231374661916 |
+The printed coefficients are exactly the leading coefficients of the true recurrence, with the final terms missing. The minimal orders are proved (exact computation).
 
-The true minimal recurrence orders are about 25 (A197230) and 43 (A196074). These estimates come from Berlekamp–Massey mod a prime and are unproved. Suggested OEIS action: correct or remove the "Empirical:" formula and cite these values.
+| A-number | Printed order | True minimal order | First failure | Missing terms to append |
+|---|---|---|---|---|
+| A197230 | 22 | 25 | n=23: a(23) = 1327965802062332, but the printed recurrence gives 1327965802062198 | `+28*a(n-23) -82*a(n-24) +40*a(n-25)` |
+| A196074 | 37 | 43 | n=38: a(38) = 299231374661523, but the printed recurrence gives 299231374661916 | `+274*a(n-38) +112*a(n-39) +84*a(n-40) -56*a(n-41) +8*a(n-42) -8*a(n-43)` |
 
-## Ready-to-paste OEIS edits
+With the missing terms appended, each recurrence was checked to hold over a further 59 consecutive terms beyond its order.
 
-A197230: add
-  %F A197230 The empirical recurrence above fails at n=23: a(23) = 1327965802062332, while the recurrence gives 1327965802062198. See link. - _Cooper Kernan_, Nov 12 2026
-  %H A197230 Cooper Kernan, <a href="https://github.com/cprkrn/oeis-hardin-proofs/blob/main/ERRATA.md">Counterexample to the empirical recurrence</a>
+**Ready-to-paste OEIS edits**
 
-A196074: add
-  %F A196074 The empirical recurrence above fails at n=38: a(38) = 299231374661523, while the recurrence gives 299231374661916. See link. - _Cooper Kernan_, Nov 12 2026
-  %H A196074 Cooper Kernan, <a href="https://github.com/cprkrn/oeis-hardin-proofs/blob/main/ERRATA.md">Counterexample to the empirical recurrence</a>
+    %F A197230 The empirical recurrence above is incomplete: the full recurrence (order 25, minimal) adds +28*a(n-23) -82*a(n-24) +40*a(n-25). Without these terms it fails at n=23 (a(23) = 1327965802062332). See link. - _Cooper Kernan_, Nov 12 2026
+    %H A197230 Cooper Kernan, <a href="https://github.com/cprkrn/oeis-hardin-proofs/blob/main/ERRATA.md">Errata and full recurrence</a>
 
+    %F A196074 The empirical recurrence above is incomplete: the full recurrence (order 43, minimal) adds +274*a(n-38) +112*a(n-39) +84*a(n-40) -56*a(n-41) +8*a(n-42) -8*a(n-43). Without these terms it fails at n=38 (a(38) = 299231374661523). See link. - _Cooper Kernan_, Nov 12 2026
+    %H A196074 Cooper Kernan, <a href="https://github.com/cprkrn/oeis-hardin-proofs/blob/main/ERRATA.md">Errata and full recurrence</a>
 
-# Errata: 26 incorrect "Empirical g.f." formulas
+## 2. Generating functions that are substantively wrong (6), plus one wrong constant term
 
-Found by expanding each g.f. and comparing it with the listed terms; see `batch3_gf/gf_results.csv` for details. A sample of six was independently re-expanded with sympy and confirmed.
+| A-number | Problem |
+|---|---|
+| A194476, A194481 | The g.f.'s coefficients are exactly 1/3 of the true terms. |
+| A232591 | The g.f.'s coefficients are exactly 1/2 of the true terms. |
+| A280227 | The g.f. gives exactly a(n)/2 for every n. |
+| A201081 | The g.f. expands to 3,5,15,21,... but the true terms are 3,7,13,25,47,... |
+| A208410 | The g.f. is character-for-character the g.f. of A208409, which it generates correctly; it was evidently copied onto the wrong entry. |
+| A183777 | The constant term is wrong: a(0)=16 but the g.f. gives 0. The g.f. is proved correct for n>=1. |
 
-- **Wrong by a constant factor:** A194476, A194481 (1/3 of true terms); A232591 (1/2); A280227 (a(n+1)/2).
-- **Belong to a different sequence or are wrong outright:** A201081 (gives 3,5,15,21,... vs 3,7,13,25,...); A208410 (gives 2,15,182,... vs 5,187,10682,...).
-- **Missing constant term:** A183777 (a(0)=16, but the g.f. gives 0; correct for n>=1).
-- **Offset (off by a factor of x):** A197274, A297953 (proved); A068778, A187452, A200456, A201875, A202883, A209603, A209962, A220172, A221241, A230470, A231081, A239532, A268133, A274099, A274233, A284076 (x*G(x) matches all listed terms); A144135 (G(x)/x matches).
+## 3. Offset corrections only (20)
+
+These rational functions are mathematically right, but one power of x is off for the entry's offset. Two of these entries (A144135, A187452) carry later comments calling the g.f. verified, so editors may treat this group as cosmetic.
+
+- **x·G(x) matches all terms:** A197274 and A297953 (proved), and A068778, A187452, A200456, A201875, A202883, A209603, A209962, A220172, A221241, A230470, A231081, A239532, A268133, A274099, A274233, A284076.
+- **G(x)/x matches:** A144135.
+
+## Suggested order of submission
+
+Section 1 first, then section 2, then section 3 as a single batch note.

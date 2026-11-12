@@ -19,7 +19,7 @@ A generic prover (`engine.py`, `families.py`, `prove2.py`) covers 30 further Har
 - **False:** 2 (see `ERRATA.md`).
 - **Not attempted:** 561 were too large, and 291 have formulas that are not linear recurrences or polynomials.
 - **Checks:** every listed OEIS term is reproduced. For every proved entry, adding 1 to one coefficient makes the check fail, as it should.
-- **Not yet done:** batch 2 has not been independently re-implemented. The two refutations have been confirmed independently.
+- **Independent audit:** an independent re-implementation (separate code, no shared files) confirmed all 2,045 proofs. It also confirmed both refutations, which it found to be truncated recurrences (see `ERRATA.md`).
 
 Total new proofs in this repository: 887 + 2,045 = 2,932.
 
@@ -29,3 +29,11 @@ Total new proofs in this repository: 887 + 2,045 = 2,932.
 - **Proved:** 705. Of these, 603 follow from the proved recurrences, and 102 were computed directly. 61 of the 102 come from 5 new array families.
 - **Incorrect:** 26 (listed in `ERRATA.md`).
 - **Term check:** all listed terms of 2,968 computable entries were rechecked, and no wrong terms were found.
+
+## Independent verification (all batches)
+
+An independent auditor rewrote everything from scratch and had no disagreements:
+- 677 + 75 + 135 recurrences in batch 1;
+- all 2,045 recurrences in batch 2;
+- 704 of the 705 proved g.f.s (A234139 was not checked because of a compute limit);
+- all 28 errata.
