@@ -22,3 +22,10 @@ A generic prover (`engine.py`, `families.py`, `prove2.py`) covers 30 further Har
 - **Not yet done:** batch 2 has not been independently re-implemented. The two refutations have been confirmed independently.
 
 Total new proofs in this repository: 887 + 2,045 = 2,932.
+
+## Batch 3 (`batch3_gf/`): empirical generating functions
+
+- **Checked:** 3,601 "Empirical g.f." formulas, 3,445 of them by Colin Barker.
+- **Proved:** 705. Of these, 603 follow from the proved recurrences, and 102 were computed directly. 61 of the 102 come from 5 new array families.
+- **Incorrect:** 26 (listed in `ERRATA.md`).
+- **Term check:** all listed terms of 2,968 computable entries were rechecked, and no wrong terms were found.
